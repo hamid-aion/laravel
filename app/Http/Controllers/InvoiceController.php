@@ -14,8 +14,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices=Invoice::all();
-       return view('index',compact('invoices'));
+        $invoices=Invoice::simplePaginate(5);
+       return view('Invoice.index',compact('invoices'));
     }
 
     /**
@@ -23,7 +23,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return view('createinvoice');
+        return view('Invoice.create');
     }
 
     /**
@@ -59,7 +59,7 @@ class InvoiceController extends Controller
     {
         //
         $invoice=Invoice::find($id);
-        return view('showinvoice',compact('invoice'));
+        return view('Invoice.show',compact('invoice'));
     }
 
     /**
@@ -69,9 +69,9 @@ class InvoiceController extends Controller
     {
         //
         $invoice=Invoice::find($id);
-        return view('editinvoice',compact('invoice'));
+        return view('Invoice.edit',compact('invoice'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      */

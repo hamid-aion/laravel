@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('title', 'Invoice List')
+
+@section('content')
+
 <html>
 
 <head>
@@ -139,3 +145,4 @@
 </body>
 
 </html>
+@endsection
