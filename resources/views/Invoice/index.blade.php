@@ -62,8 +62,9 @@
        
         <br>
         <br>
+        @if (Auth::check() && Auth::user()->role == 'admin')
         <a href="{{ route('Invoices.create') }}" class="button">Add New Invoice</a>
-
+        @endif
         <table id="customers">
             <thead>
                 <tr>
@@ -73,7 +74,10 @@
                     <th>Amount</th>
                     <th>Invoice Date</th>
                     <th>Status</th>
+                    @if (Auth::check() && Auth::user()->role == 'admin')
                     <th colspan="3" style="text-align: center">Actions</th>
+            @endif
+                   
                 </tr>
             </thead>
             <tbody>
@@ -85,12 +89,15 @@
                         <td>{{ $invoice->amount }}</td>
                         <td>{{ $invoice->invoice_date }}</td>
                         <td>{{ $invoice->status }}</td>
+                        @if(Auth::check() && Auth::user()->role == 'admin')
                         <td><a class="button" href="{{ route('Invoices.edit', $invoice->id) }}">Edit</a></td>
                         <td><a class="button" href="{{ route('Invoices.show', $invoice->id) }}">View</button></td>
                         <form action="{{ route('Invoices.destroy', $invoice->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <td><button type="submit" class="button btn btn-danger">Delete</button></td>
+                            <td><button type="submit" class="button btn btn-danger">Delete</button>
+                            </td>
+                            @endif
                         </form>
                     </tr>
                 @endforeach
