@@ -26,10 +26,14 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            if (Auth::user()->role == 'admin' || Auth::user()->role == 'user') 
+            if (Auth::user()->role == 'admin') 
             {
                 return redirect()->route('Invoices.index');
             } 
+            else
+             {
+                return view('welcome');
+            }
         }
 
         return redirect()->back()->withErrors([

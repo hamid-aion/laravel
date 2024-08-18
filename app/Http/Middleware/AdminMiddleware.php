@@ -15,10 +15,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->role != 'admin') {
-            return redirect('/'); // or any other path
+        if (!auth()->check() || auth()->user()->role != 'admin') 
+        {
+            return redirect('/'); // Redirect to a safe page if not authenticated or not an admin
         }
-    
+
         return $next($request);
     }
 }
